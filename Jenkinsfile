@@ -1,25 +1,11 @@
 pipeline {
   agent any
   stages {
-    stage('Dev Build') {
-      steps {
-        echo 'Dev Build to Start'
-        git(url: 'https://github.com/LeafPages/EyeManage', branch: 'master', poll: true)
-        bat(script: 'mvn install', label: 'Dev')
-      }
-    }
-
     stage('Smoke Test') {
       steps {
         echo 'Smoke test is going to start'
         git(url: 'https://github.com/LeafPages/EyeAutomation', branch: 'master', poll: true)
-        bat(script: 'mvn test -DEnvironment=Dev', label: 'Dev Smoke')
-      }
-    }
-
-    stage('Deploy in QA') {
-      steps {
-        echo 'SSH into AWS and Move the build'
+        bat(script: 'mvn test -DEnvironment=QA', label: 'QA Smoke')
       }
     }
 
@@ -32,14 +18,8 @@ pipeline {
 
     stage('Ceritication') {
       steps {
-        input(message: 'Are you sure to certify this?', ok: 'Yes')
+        input(message: 'Manually do', ok: 'Yes')
         waitUntil()
-      }
-    }
-
-    stage('Deploy into UAT') {
-      steps {
-        echo 'Deployed in UAT (SSH into UAT AWS)'
       }
     }
 
