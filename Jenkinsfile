@@ -10,8 +10,17 @@ pipeline {
     }
 
     stage('Ceritication') {
+      when {
+        branch 'master'
+      }
       steps {
         echo 'QA Certified'
+      }
+    }
+
+    stage('Production bulid') {
+      steps {
+        echo 'QA Bulid moved to production.'
       }
     }
 
