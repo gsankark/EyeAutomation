@@ -11,8 +11,7 @@ pipeline {
 
     stage('Ceritication') {
       steps {
-        input 'yes'
-        waitUntil()
+        echo 'QA Certified'
       }
     }
 
