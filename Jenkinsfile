@@ -9,16 +9,9 @@ pipeline {
       }
     }
 
-    stage('Sanity Test in QA') {
-      steps {
-        echo 'About to run Sanity in QA'
-        bat(script: 'mvn test -DEnvironment=QA', label: 'Maven QA')
-      }
-    }
-
     stage('Ceritication') {
       steps {
-        input(message: 'yes', ok: 'Yes')
+        input 'yes'
         waitUntil()
       }
     }
