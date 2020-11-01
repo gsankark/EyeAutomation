@@ -18,7 +18,7 @@ pipeline {
 
     stage('Ceritication') {
       steps {
-        input(message: 'Manually do', ok: 'Yes')
+        input(message: 'yes', ok: 'Yes')
         waitUntil()
       }
     }
